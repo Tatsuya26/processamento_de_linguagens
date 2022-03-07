@@ -8,6 +8,7 @@ real    = r'(\+|-)?(\d+)(?:\.(\d+))?'
 pint    = re.compile(inteiro)
 preal   = re.compile(real)
 #'\b -> operador de contexto -> Fronteira de uma palavra
+#\1
 palavraDobrada = r'\b(\w+)\s+\1\b'
 
 
