@@ -1,0 +1,149 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> lista
+Rule 1     lista -> [ conteudo ]
+Rule 2     conteudo -> <empty>
+Rule 3     conteudo -> elementos
+Rule 4     elementos -> elem
+Rule 5     elementos -> elem , elementos
+Rule 6     elem -> NUM
+Rule 7     elem -> PAL
+Rule 8     elem -> lista
+
+Terminals, with rules where they appear
+
+,                    : 5
+NUM                  : 6
+PAL                  : 7
+[                    : 1
+]                    : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+conteudo             : 1
+elem                 : 4 5
+elementos            : 3 5
+lista                : 8 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . lista
+    (1) lista -> . [ conteudo ]
+
+    [               shift and go to state 2
+
+    lista                          shift and go to state 1
+
+state 1
+
+    (0) S' -> lista .
+
+
+
+state 2
+
+    (1) lista -> [ . conteudo ]
+    (2) conteudo -> .
+    (3) conteudo -> . elementos
+    (4) elementos -> . elem
+    (5) elementos -> . elem , elementos
+    (6) elem -> . NUM
+    (7) elem -> . PAL
+    (8) elem -> . lista
+    (1) lista -> . [ conteudo ]
+
+    ]               reduce using rule 2 (conteudo -> .)
+    NUM             shift and go to state 6
+    PAL             shift and go to state 7
+    [               shift and go to state 2
+
+    conteudo                       shift and go to state 3
+    elementos                      shift and go to state 4
+    elem                           shift and go to state 5
+    lista                          shift and go to state 8
+
+state 3
+
+    (1) lista -> [ conteudo . ]
+
+    ]               shift and go to state 9
+
+
+state 4
+
+    (3) conteudo -> elementos .
+
+    ]               reduce using rule 3 (conteudo -> elementos .)
+
+
+state 5
+
+    (4) elementos -> elem .
+    (5) elementos -> elem . , elementos
+
+    ]               reduce using rule 4 (elementos -> elem .)
+    ,               shift and go to state 10
+
+
+state 6
+
+    (6) elem -> NUM .
+
+    ,               reduce using rule 6 (elem -> NUM .)
+    ]               reduce using rule 6 (elem -> NUM .)
+
+
+state 7
+
+    (7) elem -> PAL .
+
+    ,               reduce using rule 7 (elem -> PAL .)
+    ]               reduce using rule 7 (elem -> PAL .)
+
+
+state 8
+
+    (8) elem -> lista .
+
+    ,               reduce using rule 8 (elem -> lista .)
+    ]               reduce using rule 8 (elem -> lista .)
+
+
+state 9
+
+    (1) lista -> [ conteudo ] .
+
+    $end            reduce using rule 1 (lista -> [ conteudo ] .)
+    ,               reduce using rule 1 (lista -> [ conteudo ] .)
+    ]               reduce using rule 1 (lista -> [ conteudo ] .)
+
+
+state 10
+
+    (5) elementos -> elem , . elementos
+    (4) elementos -> . elem
+    (5) elementos -> . elem , elementos
+    (6) elem -> . NUM
+    (7) elem -> . PAL
+    (8) elem -> . lista
+    (1) lista -> . [ conteudo ]
+
+    NUM             shift and go to state 6
+    PAL             shift and go to state 7
+    [               shift and go to state 2
+
+    elem                           shift and go to state 5
+    elementos                      shift and go to state 11
+    lista                          shift and go to state 8
+
+state 11
+
+    (5) elementos -> elem , elementos .
+
+    ]               reduce using rule 5 (elementos -> elem , elementos .)
+

@@ -1,0 +1,144 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Lista
+Rule 1     Lista -> [ conteudo ]
+Rule 2     conteudo -> <empty>
+Rule 3     conteudo -> Elementos
+Rule 4     Elementos -> Elem , Elementos
+Rule 5     Elementos -> Elem
+Rule 6     Elem -> NUM
+Rule 7     Elem -> END
+Rule 8     Elem -> START
+
+Terminals, with rules where they appear
+
+,                    : 4
+END                  : 7
+NUM                  : 6
+START                : 8
+[                    : 1
+]                    : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+Elem                 : 4 5
+Elementos            : 3 4
+Lista                : 0
+conteudo             : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Lista
+    (1) Lista -> . [ conteudo ]
+
+    [               shift and go to state 2
+
+    Lista                          shift and go to state 1
+
+state 1
+
+    (0) S' -> Lista .
+
+
+
+state 2
+
+    (1) Lista -> [ . conteudo ]
+    (2) conteudo -> .
+    (3) conteudo -> . Elementos
+    (4) Elementos -> . Elem , Elementos
+    (5) Elementos -> . Elem
+    (6) Elem -> . NUM
+    (7) Elem -> . END
+    (8) Elem -> . START
+
+    ]               reduce using rule 2 (conteudo -> .)
+    NUM             shift and go to state 6
+    END             shift and go to state 7
+    START           shift and go to state 8
+
+    conteudo                       shift and go to state 3
+    Elementos                      shift and go to state 4
+    Elem                           shift and go to state 5
+
+state 3
+
+    (1) Lista -> [ conteudo . ]
+
+    ]               shift and go to state 9
+
+
+state 4
+
+    (3) conteudo -> Elementos .
+
+    ]               reduce using rule 3 (conteudo -> Elementos .)
+
+
+state 5
+
+    (4) Elementos -> Elem . , Elementos
+    (5) Elementos -> Elem .
+
+    ,               shift and go to state 10
+    ]               reduce using rule 5 (Elementos -> Elem .)
+
+
+state 6
+
+    (6) Elem -> NUM .
+
+    ,               reduce using rule 6 (Elem -> NUM .)
+    ]               reduce using rule 6 (Elem -> NUM .)
+
+
+state 7
+
+    (7) Elem -> END .
+
+    ,               reduce using rule 7 (Elem -> END .)
+    ]               reduce using rule 7 (Elem -> END .)
+
+
+state 8
+
+    (8) Elem -> START .
+
+    ,               reduce using rule 8 (Elem -> START .)
+    ]               reduce using rule 8 (Elem -> START .)
+
+
+state 9
+
+    (1) Lista -> [ conteudo ] .
+
+    $end            reduce using rule 1 (Lista -> [ conteudo ] .)
+
+
+state 10
+
+    (4) Elementos -> Elem , . Elementos
+    (4) Elementos -> . Elem , Elementos
+    (5) Elementos -> . Elem
+    (6) Elem -> . NUM
+    (7) Elem -> . END
+    (8) Elem -> . START
+
+    NUM             shift and go to state 6
+    END             shift and go to state 7
+    START           shift and go to state 8
+
+    Elem                           shift and go to state 5
+    Elementos                      shift and go to state 11
+
+state 11
+
+    (4) Elementos -> Elem , Elementos .
+
+    ]               reduce using rule 4 (Elementos -> Elem , Elementos .)
+

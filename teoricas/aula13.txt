@@ -1,0 +1,115 @@
+()
+(67 () ())
+
+#gramatica concreta
+
+ABin -> ()
+            | (num ABin ABin)
+        
+
+#gramatica abstrata
+
+ABin -> empty 
+        | num ABin ABin
+
+---------------------------------------------------------
+
+Lista -> '[' ']' 
+        | '[' LCont ']'
+
+Lista -> num 
+        | Lcont ',' num
+
+#gramatica abstrata
+
+Lista -> emptys
+        | Lista num
+
+
+-----------------------------------------------------------
+
+Exp -> Exp '+' Exp
+        | Exp '*' Exp
+        | num
+
+p1: Exp ->  Exp '+' Termo
+p2:        | Termo
+    
+p3: Termo -> Termo '*' Fator
+p4:        | num
+
+p5: Fator -> num
+            | '(' Exp ')'
+            | id
+
+2 + 3 * 6
+
+Exp = 
+    p1 => Exp '+' Termo = 
+    p3 => Exp '+' Termo '*' Termo
+    p4 => Exp '+' num '*' num
+    p2 => Termo '+' num '*' num
+
+
+----------------------------------------------------------------------------------------
+a = 23 * 7
+b = 2 + a
+! a
+! a*3+45
+? c
+! a/c
+!!
+
+Programa -> Comandos FIM {id,'?','!', FIM}
+
+Comandos ->                  {FIM}
+          | Comando Comandos {id,'?', '!'}
+
+
+Comando -> Atrib {id} | Print{!} | Read
+
+Atrib -> id '=' Exp
+Print -> '!' Exp
+Read  -> '?' id
+
+
+Exp ->  Termo Exp2 {num,id,'('}
+        | Termo
+
+Exp2 ->                    {'(',FIM, id,'?','!'}
+        | '+' Exp          {+}
+        | '-' Exp          {-}
+
+Termo -> Fator Termo2 {num | id | '('}
+
+Termo2 -> (simbolos de Exp2) {'(',FIM, id,'?','!','+,'-'}
+        | '*' Termo {*}
+        | '/' Termo {/}
+
+Fator -> num | id | '(' Exp ')' 
+
+
+
+
+
+
+
+
+
+Exp -> Exp '+' Exp
+        | Exp '*' Exp
+        | num
+
+p1: Exp ->  Exp '+' Termo
+p2:        | Termo
+    
+p3: Termo -> Termo '*' Fator
+p4:        | num
+
+p5: Fator -> num
+            | '(' Exp ')'
+            | id
+
+
+
+
