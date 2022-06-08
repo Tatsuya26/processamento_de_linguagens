@@ -1,0 +1,9 @@
+int idade
+str nome
+
+#oalalasdfmlspfa
+if(idade < nome) 
+    print( "TOP")
+
+else 
+    print("ERRo")

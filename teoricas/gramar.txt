@@ -1,0 +1,15 @@
+< > id text id value <? ?> 
+
+
+Maquina estados:
+
+   --------------
+   |            |
+Initial -----> PI (aceita id = value)
+    |     <?
+  < |
+    |
+  OTAG
+(aceita value id = )
+
+
